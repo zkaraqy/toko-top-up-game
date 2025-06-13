@@ -21,6 +21,9 @@ use Psr\Log\LoggerInterface;
  */
 abstract class BaseController extends Controller
 {
+
+    protected static $namaToko = 'Toko Top-up Diamond Game';
+
     /**
      * Instance of the main Request object.
      *
@@ -54,5 +57,7 @@ abstract class BaseController extends Controller
         // Preload any models, libraries, etc, here.
 
         // E.g.: $this->session = service('session');
+        session();
+        helper('form');
     }
 }
