@@ -26,7 +26,11 @@
     <!-- [Template CSS Files] -->
     <link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>" id="main-style-link">
     <link rel="stylesheet" href="<?= base_url('assets/css/style-preset.css') ?>">
-
+    <style>
+        div.text-danger {
+            font-size: 12px;
+        }
+    </style>
 </head>
 <!-- [Head] end -->
 <!-- [Body] Start -->
@@ -44,90 +48,81 @@
         <div class="auth-wrapper v3">
             <div class="auth-form">
                 <div class="auth-header">
-                    <!-- <a href="#"><img src="../assets/images/logo-dark.svg" alt="img"></a> -->
                 </div>
                 <div class="card my-5 shadow-sm">
+                    <?= form_open('register/submit', ['method' => 'POST', 'autocomplete' => 'off']) ?>
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-end mb-4">
                             <h3 class="mb-0"><b>Registrasi</b></h3>
                             <a href="<?= site_url('/login') ?>" class="link-primary">Udah punya akun?</a>
                         </div>
+                        <?php if (session()->getFlashdata('is_negative_response')) { ?>
+                            <div class="alert <?= session()->getFlashdata('is_negative_response') ? 'alert-danger' : 'alert-success' ?> alert-dismissible fade show"
+                                role="alert">
+                                <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:" width="20" height="20">
+                                    <use xlink:href="<?= session()->getFlashdata('is_negative_response') ? '#exclamation-triangle-fill' : 'check-circle-fill' ?>" />
+                                </svg>
+                                <?= session()->getFlashdata('message'); ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        <?php } ?>
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group mb-3">
                                     <label class="form-label">Nama <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" placeholder="Masukkan nama...">
+                                    <input type="text" class="form-control <?= (session('errors.nama')) ? 'is-invalid' : '' ?>" name="nama" placeholder="Masukkan nama..." value="<?= old('nama') ?>">
+                                    <?php if (session('errors.nama')) : ?>
+                                        <div class="text-danger"><?= session('errors.nama') ?></div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="form-group mb-3">
-                            <label class="form-label">Company</label>
-                            <input type="text" class="form-control" placeholder="Company">
-                        </div> -->
                         <div class="form-group mb-3">
                             <label class="form-label">Username <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" placeholder="Masukkan username...">
+                            <input type="text" class="form-control <?= (session('errors.username')) ? 'is-invalid' : '' ?>" name="username" placeholder="Masukkan username..." value="<?= old('username') ?>">
+                            <?php if (session('errors.username')) : ?>
+                                <div class="text-danger"><?= session('errors.username') ?></div>
+                            <?php endif; ?>
                         </div>
                         <div class="form-group mb-3">
                             <label class="form-label">Alamat Email <span class="text-danger">*</span></label>
-                            <input type="email" class="form-control" placeholder="Masukkan alamat email...">
+                            <input type="email" class="form-control <?= (session('errors.email')) ? 'is-invalid' : '' ?>" name="email" placeholder="Masukkan alamat email..." value="<?= old('email') ?>">
+                            <?php if (session('errors.email')) : ?>
+                                <div class="text-danger"><?= session('errors.email') ?></div>
+                            <?php endif; ?>
                         </div>
-                        <div class="form-group mb-3 row">
-                            <label class="form-label">Password <span class="text-danger">*</span></label>
-                            <div class="col-10 pe-0">
-                                <input type="password" class="form-control" placeholder="Masukkan password...">
+                        <div class="form-group mb-3">
+                            <div class="row">
+                                <div class="col-12">
+                                    <label class="form-label">Password <span class="text-danger">*</span></label>
+                                </div>
                             </div>
-                            <div class="col-2 d-flex">
-                                <button class="btn btn-warning d-flex align-items-center">
-                                    <i class="ti ti-eye"></i>
-                                </button>
+                            <div class="row">
+                                <div class="col-10 pe-0">
+                                    <input id="input-password" type="password" class="form-control <?= (session('errors.password')) ? 'is-invalid' : '' ?>"
+                                        name="password" placeholder="Masukkan password..." value="<?= old('password') ?>">
+                                </div>
+                                <div class="col-2 d-flex">
+                                    <button id="toggle-password" type="button" class="btn btn-warning d-flex align-items-center">
+                                        <i class="ti ti-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <?php if (session('errors.password')) : ?>
+                                    <div class="col-10">
+                                        <div class="text-danger"><?= session('errors.password') ?></div>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <div class="d-grid mt-3">
-                            <button type="button" class="btn btn-primary">Create Account</button>
+                            <button type="submit" class="btn btn-primary">Create Account</button>
                         </div>
-                        <!-- <div class="saprator mt-3">
-                            <span>Sign up with</span>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="d-grid">
-                                    <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
-                                        <img src="../assets/images/authentication/google.svg" alt="img"> <span class="d-none d-sm-inline-block"> Google</span>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="d-grid">
-                                    <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
-                                        <img src="../assets/images/authentication/twitter.svg" alt="img"> <span class="d-none d-sm-inline-block"> Twitter</span>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="d-grid">
-                                    <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
-                                        <img src="../assets/images/authentication/facebook.svg" alt="img"> <span class="d-none d-sm-inline-block"> Facebook</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div> -->
-
                     </div>
+                    <?= form_close() ?>
                 </div>
                 <div class="auth-footer row">
-                    <!-- <div class=""> -->
-                    <!-- <div class="col my-1">
-                        <p class="m-0">Copyright © <a href="#">Codedthemes</a></p>
-                    </div>
-                    <div class="col-auto my-1">
-                        <ul class="list-inline footer-link mb-0">
-                            <li class="list-inline-item"><a href="#">Home</a></li>
-                            <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
-                            <li class="list-inline-item"><a href="#">Contact us</a></li>
-                        </ul>
-                    </div> -->
-                    <!-- </div> -->
                 </div>
             </div>
         </div>
@@ -140,6 +135,7 @@
     <script src="<?= base_url('assets/js/fonts/custom-font.js') ?>"></script>
     <script src="<?= base_url('assets/js/pcoded.js') ?>"></script>
     <script src="<?= base_url('assets/js/plugins/feather.min.js') ?>"></script>
+    <script src="<?= base_url('assets/js/main.js') ?>"></script>
 
 
 

@@ -106,146 +106,7 @@
     </div>
 </section>
 
-<!-- Payment Methods Section -->
-<section class="payment-section py-5 bg-light mb-5">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold mb-3">Metode Pembayaran</h2>
-            <p class="lead text-muted">Mendukung berbagai metode pembayaran</p>
-        </div>
-
-        <!-- Payment Methods Slider -->
-        <div id="paymentCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="row justify-content-center">
-                        <div class="col-2 col-md-1">
-                            <div class="payment-card">
-                                <img src="<?= base_url('assets/images/payments/dana.png') ?>" alt="DANA" class="img-fluid">
-                            </div>
-                        </div>
-                        <div class="col-2 col-md-1">
-                            <div class="payment-card">
-                                <img src="<?= base_url('assets/images/payments/gopay.png') ?>" alt="GoPay" class="img-fluid">
-                            </div>
-                        </div>
-                        <div class="col-2 col-md-1">
-                            <div class="payment-card">
-                                <img src="<?= base_url('assets/images/payments/ovo.png') ?>" alt="OVO" class="img-fluid">
-                            </div>
-                        </div>
-                        <div class="col-2 col-md-1">
-                            <div class="payment-card">
-                                <img src="<?= base_url('assets/images/payments/shopeepay.png') ?>" alt="ShopeePay" class="img-fluid">
-                            </div>
-                        </div>
-                        <div class="col-2 col-md-1">
-                            <div class="payment-card">
-                                <img src="<?= base_url('assets/images/payments/linkaja.png') ?>" alt="LinkAja" class="img-fluid">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="row justify-content-center">
-                        <div class="col-2 col-md-1">
-                            <div class="payment-card">
-                                <img src="<?= base_url('assets/images/payments/bca.png') ?>" alt="BCA" class="img-fluid">
-                            </div>
-                        </div>
-                        <div class="col-2 col-md-1">
-                            <div class="payment-card">
-                                <img src="<?= base_url('assets/images/payments/mandiri.png') ?>" alt="Mandiri" class="img-fluid">
-                            </div>
-                        </div>
-                        <div class="col-2 col-md-1">
-                            <div class="payment-card">
-                                <img src="<?= base_url('assets/images/payments/bni.png') ?>" alt="BNI" class="img-fluid">
-                            </div>
-                        </div>
-                        <div class="col-2 col-md-1">
-                            <div class="payment-card">
-                                <img src="<?= base_url('assets/images/payments/bri.png') ?>" alt="BRI" class="img-fluid">
-                            </div>
-                        </div>
-                        <div class="col-2 col-md-1">
-                            <div class="payment-card">
-                                <img src="<?= base_url('assets/images/payments/cimb.png') ?>" alt="CIMB Niaga" class="img-fluid">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="row justify-content-center">
-                        <div class="col-2 col-md-1">
-                            <div class="payment-card">
-                                <img src="<?= base_url('assets/images/payments/visa.png') ?>" alt="Visa" class="img-fluid">
-                            </div>
-                        </div>
-                        <div class="col-2 col-md-1">
-                            <div class="payment-card">
-                                <img src="<?= base_url('assets/images/payments/mastercard.png') ?>" alt="Mastercard" class="img-fluid">
-                            </div>
-                        </div>
-                        <div class="col-2 col-md-1">
-                            <div class="payment-card">
-                                <img src="<?= base_url('assets/images/payments/paypal.png') ?>" alt="PayPal" class="img-fluid">
-                            </div>
-                        </div>
-                        <div class="col-2 col-md-1">
-                            <div class="payment-card">
-                                <img src="<?= base_url('assets/images/payments/indomaret.png') ?>" alt="Indomaret" class="img-fluid">
-                            </div>
-                        </div>
-                        <div class="col-2 col-md-1">
-                            <div class="payment-card">
-                                <img src="<?= base_url('assets/images/payments/alfamart.png') ?>" alt="Alfamart" class="img-fluid">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Features Section -->
-<!-- <section class="features-section py-5">
-    <div class="container">
-        <div class="row g-4">
-            <div class="col-lg-4 col-md-6">
-                <div class="feature-card text-center">
-                    <div class="feature-icon mb-3">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <h5 class="fw-bold mb-3">Proses Cepat</h5>
-                    <p class="text-muted">Diamond masuk ke akun Anda dalam hitungan menit setelah pembayaran berhasil</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="feature-card text-center">
-                    <div class="feature-icon mb-3">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h5 class="fw-bold mb-3">Aman & Terpercaya</h5>
-                    <p class="text-muted">Transaksi dijamin aman dengan sistem keamanan berlapis dan garansi uang kembali</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="feature-card text-center">
-                    <div class="feature-icon mb-3">
-                        <i class="fas fa-headset"></i>
-                    </div>
-                    <h5 class="fw-bold mb-3">Support 24/7</h5>
-                    <p class="text-muted">Tim customer service siap membantu Anda kapan saja jika ada kendala</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> -->
-
 <style>
-/* Hero Section */
 .hero-section {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
@@ -272,7 +133,6 @@
     50% { transform: translateY(-20px); }
 }
 
-/* Game Cards */
 .games-section {
     background: #f8f9fa;
 }
@@ -349,57 +209,6 @@
     margin-bottom: 0;
 }
 
-/* Payment Methods */
-.payment-section {
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-}
-
-.payment-card {
-    background: white;
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-    margin: 0 5px;
-}
-
-.payment-card:hover {
-    transform: translateY(-5px);
-}
-
-.payment-card img {
-    max-height: 40px;
-    width: auto;
-}
-
-/* Features Section */
-.feature-card {
-    padding: 2rem;
-    border-radius: 15px;
-    background: white;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-    height: 100%;
-}
-
-.feature-card:hover {
-    transform: translateY(-5px);
-}
-
-.feature-icon {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-    color: white;
-    font-size: 2rem;
-}
-
-/* Button Styles */
 .btn-primary {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border: none;

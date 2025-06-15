@@ -3,6 +3,7 @@
 namespace Config;
 
 use App\Filters\AuthFilter;
+use App\Filters\CMSFilter;
 use CodeIgniter\Config\Filters as BaseFilters;
 use CodeIgniter\Filters\Cors;
 use CodeIgniter\Filters\CSRF;
@@ -36,6 +37,7 @@ class Filters extends BaseFilters
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
         'auth'          => AuthFilter::class,
+        'cms'           => CMSFilter::class
     ];
 
     /**
@@ -76,6 +78,9 @@ class Filters extends BaseFilters
             // 'invalidchars',
             'auth' => [
                 'except' => ['/', 'login', 'login/*', 'register', 'register/*']
+            ],
+            'cms' => [
+                'except' => ['/', 'login', 'login/*', 'register', 'register/*', 'logout', 'profile', 'orders', 'orders/*', 'games', 'games/*']
             ]
         ],
         'after' => [

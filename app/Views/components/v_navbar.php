@@ -27,36 +27,21 @@
                         <i class="fas fa-gamepad me-1"></i>Semua Game
                     </a>
                 </li>
-            </ul>            <!-- Search Bar and Auth Section -->
+            </ul>
             <div class="d-flex align-items-center">
-                <!-- Search Bar -->
-                <form class="d-flex me-3" role="search">
-                    <div class="input-group search-container">
-                        <input class="form-control search-input" type="search" placeholder="Cari game..."
-                            aria-label="Search">
-                        <button class="btn btn-outline-light search-btn" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </form>
 
                 <!-- Authentication Section -->
                 <?php if (session()->get('isLoggedIn')): ?>
                     <!-- User is logged in -->
-                    <?php if (session()->get('user_role') === 'admin'): ?>
+                    <?php if ((bool) session()->get('userData')['is_admin']): ?>
                         <!-- Admin Menu -->
                         <div class="dropdown me-2">
-                            <button class="btn btn-outline-light dropdown-toggle auth-btn" type="button" 
-                                    id="adminDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="btn btn-outline-light dropdown-toggle auth-btn" type="button"
+                                id="adminDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-user-shield me-1"></i>
-                                <?= session()->get('username') ?? 'Admin' ?>
+                                <?= session()->get('userData')['username'] ?? 'Admin' ?>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminDropdown">
-                                <li>
-                                    <a class="dropdown-item" href="<?= base_url('/admin/dashboard') ?>">
-                                        <i class="fas fa-tachometer-alt me-2"></i>Dashboard CMS
-                                    </a>
-                                </li>
                                 <li>
                                     <a class="dropdown-item" href="<?= base_url('/admin/users') ?>">
                                         <i class="fas fa-users me-2"></i>Kelola User
@@ -72,7 +57,9 @@
                                         <i class="fas fa-shopping-cart me-2"></i>Kelola Order
                                     </a>
                                 </li>
-                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
                                 <li>
                                     <a class="dropdown-item text-danger" href="<?= base_url('/logout') ?>">
                                         <i class="fas fa-sign-out-alt me-2"></i>Logout
@@ -83,15 +70,15 @@
                     <?php else: ?>
                         <!-- Regular User Menu -->
                         <div class="dropdown me-2">
-                            <button class="btn btn-outline-light dropdown-toggle auth-btn" type="button" 
-                                    id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="btn btn-outline-light dropdown-toggle auth-btn" type="button"
+                                id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-user me-1"></i>
-                                <?= session()->get('username') ?? 'User' ?>
+                                <?= session()->get('userData')['username'] ?? 'User' ?>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                                 <li>
                                     <a class="dropdown-item" href="<?= base_url('/profile') ?>">
-                                        <i class="fas fa-user-circle me-2"></i>Profile Saya
+                                        <i class="fas fa-user-circle me-2"></i>Profile
                                     </a>
                                 </li>
                                 <li>
@@ -100,11 +87,8 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="<?= base_url('/settings') ?>">
-                                        <i class="fas fa-cog me-2"></i>Pengaturan
-                                    </a>
+                                    <hr class="dropdown-divider">
                                 </li>
-                                <li><hr class="dropdown-divider"></li>
                                 <li>
                                     <a class="dropdown-item text-danger" href="<?= base_url('/logout') ?>">
                                         <i class="fas fa-sign-out-alt me-2"></i>Logout
