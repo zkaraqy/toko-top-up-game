@@ -26,9 +26,11 @@ document.addEventListener("DOMContentLoaded", function (domEv) {
 
   const mapContext = {
     users: "user",
+    games: "game",
   };
   const mapContextAPI = {
     users: "apiusers",
+    games: "apigames",
   };
 
   if (togglePassword && fieldPassword) {
@@ -52,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function (domEv) {
     modalHapusElement.addEventListener("show.bs.modal", async (event) => {
       const button = event.relatedTarget;
       const id = button.getAttribute("data-id");
-      const context = button.getAttribute("data-context");``
+      const context = button.getAttribute("data-context");
       const btnPositive = document.getElementById("modal-btn-positive");
       const spinnerTombolModalHapus = document.getElementById(
         "spinner-tombol-modal-hapus"

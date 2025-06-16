@@ -86,6 +86,8 @@ phpunit
 #-------------------------
 vendor/
 public/assets/images/pengguna
+public/assets/images/topup
+public/assets/images/games
 
 #-------------------------
 # IDE / Development Files
