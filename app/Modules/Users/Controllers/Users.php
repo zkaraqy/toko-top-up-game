@@ -19,7 +19,8 @@ class Users extends BaseController
         $context = [
             'title' => 'CMS | ' . parent::$namaToko,
             'content' => '\App\Modules\Users\Views\v_users',
-            'users' => $this->model->findAll()
+            'users' => $this->model->paginate(5, 'bootstrap'),
+            'pager' =>  $this->model->pager
         ];
         return view('layouts/v_cms', $context);
     }
@@ -149,5 +150,31 @@ class Users extends BaseController
             session()->setFlashdata('body_pesan', "Data user telah gagal $flashDataAksi.");
             return redirect()->to(base_url('/admin/users'));
         }
+    }
+    public function search()
+    {
+        $q = $this->request->getGet('q');
+
+        $builder = $this->model;
+
+        if (!empty($q)) {
+            $builder = $this->model->groupStart()
+                ->like('nama', $q)
+                ->orLike('username', $q)
+                ->orLike('email', $q)
+                ->groupEnd();
+        }
+
+        $users = $builder->paginate(5, 'bootstrap');
+        $pager = $this->model->pager;
+
+        $context = [
+            'title' => 'CMS | ' . parent::$namaToko,
+            'content' => '\App\Modules\Users\Views\v_users',
+            'users' => $users,
+            'pager' => $pager,
+            'q' => $q
+        ];
+        return view('layouts/v_cms', $context);
     }
 }

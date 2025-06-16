@@ -3,11 +3,11 @@
         <div class="card-header">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="">
-                    <h3><i class="ti ti-users"></i> Users</h3>
-                    <span>Kelola Data User</span>
+                    <h3><i class="ti ti-users"></i> Games</h3>
+                    <span>Kelola Data Game</span>
                 </div>
                 <div class="">
-                    <a href="<?= base_url('/admin/users/form') ?>" class="btn btn-primary">
+                    <a href="<?= base_url('/admin/games/form') ?>" class="btn btn-primary">
                         <span class="d-flex gap-1">
                             <i class="ti ti-plus"></i>
                             Tambah
@@ -27,7 +27,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php } ?> <div class="col-md-6 col-12">
-                <form method="GET" action="<?= base_url('/admin/users/search') ?>" class="mb-3">
+                <form method="GET" action="<?= base_url('/admin/games/search') ?>" class="mb-3">
                     <div class="input-group">
                         <input type="text" name="q" class="form-control"
                             placeholder="Cari nama, username, atau email..."
@@ -36,14 +36,13 @@
                             <i class="ti ti-search"></i>
                         </button>
                         <?php if (!empty($q)): ?>
-                            <a href="<?= base_url('/admin/users') ?>"
+                            <a href="<?= base_url('/admin/games') ?>"
                                 class="btn btn-outline-danger d-flex align-items-center">
                                 <i class="ti ti-x"></i>
                             </a>
                         <?php endif; ?>
                     </div>
                 </form>
-
             </div>
             <div class="table-responsive">
                 <table class="table table-striped table-bordered nowrap table-hover">
@@ -51,14 +50,13 @@
                         <tr>
                             <th class="text-center" style="width: 50px;">No</th>
                             <th class="text-center">Foto</th>
-                            <th>Nama (username)</th>
-                            <th>Email</th>
-                            <th class="text-center">Status</th>
+                            <th>Judul</th>
+                            <th>Developer</th>
                             <th>Opsi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if (empty($users)): ?>
+                        <?php if (empty($games)): ?>
                             <tr>
                                 <td colspan="6" class="text-center py-4">
                                     <div class="text-muted">
@@ -72,46 +70,36 @@
                             </tr>
                         <?php else: ?>
                             <?php $no = 1; ?>
-                            <?php foreach ($users as $user) { ?>
-                                <tr id="<?= $user['id'] ?>">
+                            <?php foreach ($games as $game) { ?>
+                                <tr id="<?= $game['id'] ?>">
                                     <td class="text-center"><?php echo $no;
                                                             ++$no; ?></td>
                                     <td class="text-center"><img class="rounded"
-                                            src="/assets/images/pengguna/<?= $user['path_foto'] ?>"
+                                            src="/assets/images/games/<?= $game['path_foto'] ?>"
                                             alt="foto staf" width="100px" height="auto"
                                             style="object-fit: cover"
                                             onerror="this.onerror=null; this.src='/assets/images/blank-avatar.png';" />
                                     </td>
                                     <td>
-                                        <?= $user['nama'] ?> (<?= $user['username'] ?>)
+                                        <?= $game['title'] ?>
                                     </td>
                                     <td>
-                                        <span class="d-flex gap-1 align-items-center"><?= !empty($user['email']) ? "<i class='ti ti-mail'></i> {$user['email']}" : "" ?></span>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex justify-content-center">
-                                            <span class="badge rounded-pill bg-<?= (bool) $user['status'] ? 'success' : 'secondary' ?>"><?= $user['status'] ? 'Aktif' : 'Non-aktif' ?></span>
-                                        </div>
+                                        <?= $game['developer'] ?>
                                     </td>
                                     <td>
                                         <div class="d-flex gap-1 flex-column">
-                                            <a href="<?= base_url('/admin/users/detail/' . $user['id']); ?>" data-bs-toggle="tooltip" data-bs-title="Detail" style="width: max-content;">
+                                            <a href="<?= base_url('/admin/games/detail/' . $game['id']); ?>" data-bs-toggle="tooltip" data-bs-title="Detail" style="width: max-content;">
                                                 <button type="button" class="btn btn-outline-info d-inline-flex p-1"><i
                                                         class="ti ti-info-circle"></i></button>
                                             </a>
-                                            <a href="<?= base_url('/admin/users/form/' . $user['id']); ?>" data-bs-toggle="tooltip" data-bs-title="Edit" style="width: max-content;">
+                                            <a href="<?= base_url('/admin/games/form/' . $game['id']); ?>" data-bs-toggle="tooltip" data-bs-title="Edit" style="width: max-content;">
                                                 <button type="button" class="btn btn-outline-warning d-inline-flex p-1"><i
                                                         class="ti ti-pencil"></i></button>
                                             </a>
-                                            <div data-bs-toggle="tooltip" data-bs-title="Reset password" style="width: max-content;">
-                                                <button type="button" class="btn btn-outline-secondary d-inline-flex p-1"
-                                                    data-bs-toggle="modal" data-bs-target="#modalResetPassword" data-context="users"
-                                                    data-id="<?= $user['id'] ?>"><i class="ti ti-rotate-clockwise-2"></i></button>
-                                            </div>
                                             <div data-bs-toggle="tooltip" data-bs-title="Hapus" style="width: max-content;">
                                                 <button type="button" class="btn btn-outline-danger d-inline-flex p-1"
-                                                    data-bs-toggle="modal" data-bs-target="#modalHapus" data-context="users"
-                                                    data-id="<?= $user['id'] ?>"><i class="ti ti-trash"></i></button>
+                                                    data-bs-toggle="modal" data-bs-target="#modalHapus" data-context="games"
+                                                    data-id="<?= $game['id'] ?>"><i class="ti ti-trash"></i></button>
                                             </div>
                                         </div>
                                     </td>
