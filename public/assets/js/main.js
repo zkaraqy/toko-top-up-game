@@ -23,14 +23,15 @@ document.addEventListener("DOMContentLoaded", function (domEv) {
 
   const openEyeIconClass = "ti ti-eye";
   const offEyeIconClass = "ti ti-eye-off";
-
   const mapContext = {
     users: "user",
     games: "game",
+    "payment-methods": "metode pembayaran",
   };
   const mapContextAPI = {
     users: "apiusers",
     games: "apigames",
+    "payment-methods": "apipaymentmethods",
   };
 
   if (togglePassword && fieldPassword) {
@@ -81,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function (domEv) {
           }
           btnPositive.removeAttribute("disabled");
           spinnerTombolModalHapus.classList.replace("d-inline-block", "d-none");
-          if (document.URL.includes("/admin/users/detail/")) {
+          if (document.URL.includes("/detail/")) {
             modalInfo.show();
             return setTimeout(() => {
               return history.back();

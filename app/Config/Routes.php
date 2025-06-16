@@ -15,6 +15,12 @@ $routes->group('register', static function (RouteCollection $routes) {
     $routes->get('/', '\App\Modules\Registration\Controllers\Registration::index');
     $routes->post("submit", '\App\Modules\Registration\Controllers\Registration::submit');
 });
+$routes->group('top-up', static function (RouteCollection $routes) {
+    $routes->group('games', static function (RouteCollection $routes) {
+        $routes->get('/', '\App\Modules\Store\Controllers\Store::showAllGame');
+        $routes->get('(:segment)', '\App\Modules\Store\Controllers\Store::showDetailGameAndTopUpOption/$1');
+    });
+});
 $routes->get('profile', '');
 $routes->get('orders', '');
 $routes->group('admin', static function (RouteCollection $routes) {
@@ -26,6 +32,7 @@ $routes->group('admin', static function (RouteCollection $routes) {
     $routes->post('users/save', '\App\Modules\Users\Controllers\Users::save');
     $routes->put('users/reset-password', '\App\Modules\Users\Controllers\Users::resetPassword');
     $routes->get('games', '\App\Modules\Games\Controllers\Games::index');
+    $routes->get('games/search', '\App\Modules\Games\Controllers\Games::search');
     $routes->get('games/form', '\App\Modules\Games\Controllers\Games::form');
     $routes->get('games/form/(:num)', '\App\Modules\Games\Controllers\Games::form/$1');
     $routes->get('games/detail/(:num)', '\App\Modules\Games\Controllers\Games::detail/$1');
@@ -33,11 +40,18 @@ $routes->group('admin', static function (RouteCollection $routes) {
     $routes->post('games/topup/save', '\App\Modules\Games\Controllers\Games::saveTopUpOption');
     $routes->post('games/topup/update/(:num)', '\App\Modules\Games\Controllers\Games::updateTopUpOption/$1');
     $routes->delete('games/topup/delete/(:num)', '\App\Modules\Games\Controllers\Games::deleteTopUpOption/$1');
+    $routes->get('payment-methods', '\App\Modules\PaymentMethod\Controllers\PaymentMethod::index');
+    $routes->get('payment-methods/search', '\App\Modules\PaymentMethod\Controllers\PaymentMethod::search');
+    $routes->get('payment-methods/form', '\App\Modules\PaymentMethod\Controllers\PaymentMethod::form');
+    $routes->get('payment-methods/form/(:num)', '\App\Modules\PaymentMethod\Controllers\PaymentMethod::form/$1');
+    $routes->get('payment-methods/detail/(:num)', '\App\Modules\PaymentMethod\Controllers\PaymentMethod::detail/$1');
+    $routes->post('payment-methods/save', '\App\Modules\PaymentMethod\Controllers\PaymentMethod::save');
     $routes->get('orders', '');
 });
 
-$routes->group('api', ['namespace' => 'App\Modules\Users\Controllers'], function (RouteCollection $routes) {
-    $routes->resource('apiusers');
-    $routes->resource('apigames');
-    $routes->post('users/reset-password', '\App\Modules\Users\Controllers\APIUsers::resetPassword');
+$routes->group('api', function (RouteCollection $routes) {
+    $routes->resource('apiusers', ['namespace' => 'App\Modules\Users\Controllers']);
+    $routes->resource('apigames', ['namespace' => 'App\Modules\Games\Controllers']);
+    $routes->resource('apipaymentmethods', ['namespace' => 'App\Modules\PaymentMethod\Controllers']);
+    $routes->post('users/reset-password', ['to' => 'App\Modules\Users\Controllers\APIUsers::resetPassword']);
 });

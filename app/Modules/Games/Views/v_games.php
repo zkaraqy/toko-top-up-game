@@ -30,7 +30,7 @@
                 <form method="GET" action="<?= base_url('/admin/games/search') ?>" class="mb-3">
                     <div class="input-group">
                         <input type="text" name="q" class="form-control"
-                            placeholder="Cari nama, username, atau email..."
+                            placeholder="Cari judul atau developer..."
                             value="<?= $q ?? '' ?>">
                         <button class="btn btn-outline-secondary d-flex align-items-center" type="submit">
                             <i class="ti ti-search"></i>

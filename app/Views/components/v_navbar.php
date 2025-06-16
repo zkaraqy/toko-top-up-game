@@ -18,12 +18,12 @@
             <!-- Left Menu Items -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active fw-semibold px-3" href="<?= base_url('/') ?>">
+                    <a class="nav-link fw-semibold px-3" href="<?= base_url('/') ?>">
                         <i class="fas fa-home me-1"></i>Beranda
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fw-semibold px-3" href="<?= base_url('/games') ?>">
+                    <a class="nav-link fw-semibold px-3" href="<?= base_url('/top-up/games') ?>">
                         <i class="fas fa-gamepad me-1"></i>Semua Game
                     </a>
                 </li>
@@ -46,10 +46,14 @@
                                     <a class="dropdown-item" href="<?= base_url('/admin/users') ?>">
                                         <i class="fas fa-users me-2"></i>Kelola User
                                     </a>
-                                </li>
-                                <li>
+                                </li>                                <li>
                                     <a class="dropdown-item" href="<?= base_url('/admin/games') ?>">
                                         <i class="fas fa-gamepad me-2"></i>Kelola Game
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="<?= base_url('/admin/payment-methods') ?>">
+                                        <i class="fas fa-credit-card me-2"></i>Metode Pembayaran
                                     </a>
                                 </li>
                                 <li>

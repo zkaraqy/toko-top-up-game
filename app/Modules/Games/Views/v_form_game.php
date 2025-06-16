@@ -16,7 +16,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="card-body">
             <form action="<?= base_url('/admin/games/save') ?>" method="post" enctype="multipart/form-data">
                 <?= csrf_field() ?>
@@ -94,7 +94,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <h5><i class="ti ti-diamond"></i> Top-Up Options</h5>
-                                    <span>Kelola pilihan top-up untuk game ini</span>
+                                    <span>Kelola pilihan top-up</span>
                                 </div>
                                 <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addTopUpModal">
                                     <i class="ti ti-plus"></i> Tambah Option
@@ -114,9 +114,9 @@
                                                         <?php else : ?>
                                                             <i class="ti ti-diamond text-primary" style="font-size: 3rem;"></i>
                                                         <?php endif; ?>
-                                                        <h6 class="mb-2">Rp <?= number_format($option['price'], 0, ',', '.') ?></h6>
+                                                        <h6 class="mb-2">Rp <?= number_format($option['price'], 0, ',', '.') ?> (<?= $option['qty'] ?>)</h6>
                                                         <div class="d-flex gap-1 justify-content-center">
-                                                            <button type="button" class="btn btn-outline-warning btn-sm" onclick="editTopUpOption(<?= $option['id'] ?>, '<?= $option['price'] ?>', '<?= $option['path_foto'] ?>')">
+                                                            <button type="button" class="btn btn-outline-warning btn-sm" onclick="editTopUpOption(<?= $option['id'] ?>, <?= $option['qty'] ?>, '<?= $option['price'] ?>', '<?= $option['path_foto'] ?>')">
                                                                 <i class="ti ti-edit"></i>
                                                             </button>
                                                             <button type="button" class="btn btn-outline-danger btn-sm" onclick="deleteTopUpOption(<?= $option['id'] ?>)">
@@ -145,180 +145,177 @@
 
 <!-- Modal Add/Edit Top-Up Option -->
 <?php if (isset($game)) : ?>
-<div class="modal fade" id="addTopUpModal" tabindex="-1" aria-labelledby="addTopUpModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addTopUpModalLabel">
-                    <i class="ti ti-diamond"></i> <span id="modalTitle">Tambah Top-Up Option</span>
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="modal fade" id="addTopUpModal" tabindex="-1" aria-labelledby="addTopUpModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addTopUpModalLabel">
+                        <i class="ti ti-diamond"></i> <span id="modalTitle">Tambah Top-Up Option</span>
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="topUpForm" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <input type="hidden" id="optionId" name="option_id">
+                        <input type="hidden" name="game_id" value="<?= $game['id'] ?>">
+
+                        <div class="mb-3">
+                            <label for="qty" class="form-label">Kuantitas <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" id="qty" name="qty" placeholder="Masukkan kuantitas..." required>
+                            <div class="invalid-feedback"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="price" class="form-label">Harga <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" id="price" name="price" placeholder="Masukkan harga..." required>
+                            <div class="invalid-feedback"></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="topup_foto" class="form-label">Foto Diamond (Opsional)</label>
+                            <input type="file" class="form-control" id="topup_foto" name="path_foto" accept="image/*">
+                            <small class="text-muted">Format: JPG, PNG, GIF. Maks 2MB</small>
+                            <div class="invalid-feedback"></div>
+                        </div>
+
+                        <div id="currentImagePreview" class="text-center mb-3" style="display: none;">
+                            <label class="form-label">Foto Saat Ini:</label>
+                            <br>
+                            <img id="currentImage" src="" alt="Current" class="img-fluid" style="max-height: 100px;">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary" id="saveTopUpBtn">
+                            <i class="ti ti-device-floppy"></i> Simpan
+                        </button>
+                    </div>
+                </form>
             </div>
-            <form id="topUpForm" enctype="multipart/form-data">
-                <div class="modal-body">
-                    <input type="hidden" id="optionId" name="option_id">
-                    <input type="hidden" name="game_id" value="<?= $game['id'] ?>">
-                    
-                    <div class="mb-3">
-                        <label for="price" class="form-label">Harga <span class="text-danger">*</span></label>
-                        <input type="number" class="form-control" id="price" name="price" placeholder="Masukkan harga..." required>
-                        <div class="invalid-feedback" id="priceError"></div>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="topup_foto" class="form-label">Foto Diamond (Opsional)</label>
-                        <input type="file" class="form-control" id="topup_foto" name="path_foto" accept="image/*">
-                        <small class="text-muted">Format: JPG, PNG, GIF. Maks 2MB</small>
-                        <div class="invalid-feedback" id="topup_fotoError"></div>
-                    </div>
-                    
-                    <div id="currentImagePreview" class="text-center mb-3" style="display: none;">
-                        <label class="form-label">Foto Saat Ini:</label>
-                        <br>
-                        <img id="currentImage" src="" alt="Current" class="img-fluid" style="max-height: 100px;">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary" id="saveTopUpBtn">
-                        <i class="ti ti-device-floppy"></i> Simpan
-                    </button>
-                </div>
-            </form>
         </div>
     </div>
-</div>
 <?php endif; ?>
 
 <script>
-document.getElementById('foto')?.addEventListener('change', function(e) {
-    const file = e.target.files[0];
-    const preview = document.getElementById('imagePreview');
-    const noPreview = document.getElementById('noImagePreview');
-    
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            preview.src = e.target.result;
-            preview.classList.remove('d-none');
-            if (noPreview) {
-                noPreview.style.display = 'none';
+    document.getElementById('foto')?.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        const preview = document.getElementById('imagePreview');
+        const noPreview = document.getElementById('noImagePreview');
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.classList.remove('d-none');
+                if (noPreview) {
+                    noPreview.style.display = 'none';
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    <?php if (isset($game)) : ?>
+        let editingOptionId = null;
+
+        function resetTopUpModal() {
+            document.getElementById('topUpForm').reset();
+            document.getElementById('optionId').value = '';
+            document.getElementById('modalTitle').textContent = 'Tambah Top-Up Option';
+            document.getElementById('currentImagePreview').style.display = 'none';
+
+            document.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
+            document.querySelectorAll('.invalid-feedback').forEach(el => el.textContent = '');
+
+            editingOptionId = null;
+        }
+
+        function editTopUpOption(id, qty, price, pathFoto) {
+            editingOptionId = id;
+            document.getElementById('optionId').value = id;
+            document.getElementById('qty').value = qty;
+            document.getElementById('price').value = price;
+            document.getElementById('modalTitle').textContent = 'Edit Top-Up Option';
+
+            if (pathFoto && pathFoto !== '') {
+                document.getElementById('currentImagePreview').style.display = 'block';
+                document.getElementById('currentImage').src = '/assets/images/topup/' + pathFoto;
             }
-        };
-        reader.readAsDataURL(file);
-    }
-});
 
-<?php if (isset($game)) : ?>
-let editingOptionId = null;
+            new bootstrap.Modal(document.getElementById('addTopUpModal')).show();
+        }
 
-function resetTopUpModal() {
-    document.getElementById('topUpForm').reset();
-    document.getElementById('optionId').value = '';
-    document.getElementById('modalTitle').textContent = 'Tambah Top-Up Option';
-    document.getElementById('currentImagePreview').style.display = 'none';
-    
-    document.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
-    document.querySelectorAll('.invalid-feedback').forEach(el => el.textContent = '');
-    
-    editingOptionId = null;
-}
+        function deleteTopUpOption(id) {
+            if (confirm('Apakah Anda yakin ingin menghapus top-up option ini?')) {
+                fetch(`<?= base_url('/admin/games/topup/delete/') ?>${id}`, {
+                        method: 'DELETE',
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            document.querySelector(`[data-option-id="${id}"]`).remove();
 
-function editTopUpOption(id, price, pathFoto) {
-    editingOptionId = id;
-    document.getElementById('optionId').value = id;
-    document.getElementById('price').value = price;
-    document.getElementById('modalTitle').textContent = 'Edit Top-Up Option';
-    
-    if (pathFoto && pathFoto !== '') {
-        document.getElementById('currentImagePreview').style.display = 'block';
-        document.getElementById('currentImage').src = '/assets/images/topup/' + pathFoto;
-    }
-    
-    new bootstrap.Modal(document.getElementById('addTopUpModal')).show();
-}
-
-function deleteTopUpOption(id) {
-    if (confirm('Apakah Anda yakin ingin menghapus top-up option ini?')) {
-        fetch(`<?= base_url('/admin/games/topup/delete/') ?>${id}`, {
-            method: 'DELETE',
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-                '<?= csrf_token() ?>': '<?= csrf_hash() ?>'
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                document.querySelector(`[data-option-id="${id}"]`).remove();
-                
-                const remaining = document.querySelectorAll('[data-option-id]');
-                if (remaining.length === 0) {
-                    document.getElementById('topUpOptionsContainer').innerHTML = `
+                            const remaining = document.querySelectorAll('[data-option-id]');
+                            if (remaining.length === 0) {
+                                document.getElementById('topUpOptionsContainer').innerHTML = `
                         <div class="text-center py-4" id="noTopUpOptions">
                             <i class="ti ti-diamond text-muted" style="font-size: 4rem;"></i>
                             <p class="text-muted">Belum ada top-up option untuk game ini</p>
                         </div>
                     `;
-                }
-                
-                alert('Top-up option berhasil dihapus!');
-            } else {
-                alert('Gagal menghapus top-up option: ' + data.message);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Terjadi kesalahan saat menghapus top-up option');
-        });
-    }
-}
+                            }
 
-document.getElementById('topUpForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const formData = new FormData(this);
-    const url = editingOptionId ? 
-        `<?= base_url('/admin/games/topup/update/') ?>${editingOptionId}` : 
-        '<?= base_url('/admin/games/topup/save') ?>';
-    
-    formData.append('<?= csrf_token() ?>', '<?= csrf_hash() ?>');
-    
-    fetch(url, {
-        method: 'POST',
-        body: formData,
-        headers: {
-            'X-Requested-With': 'XMLHttpRequest'
+                            alert('Top-up option berhasil dihapus!');
+                        } else {
+                            alert('Gagal menghapus top-up option: ' + data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Terjadi kesalahan saat menghapus top-up option');
+                    });
+            }
         }
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            bootstrap.Modal.getInstance(document.getElementById('addTopUpModal')).hide();
-            
-            location.reload();
-        } else {
-            if (data.errors) {
-                Object.keys(data.errors).forEach(field => {
-                    const input = document.getElementById(field);
-                    const errorDiv = document.getElementById(field + 'Error');
-                    
-                    if (input && errorDiv) {
-                        input.classList.add('is-invalid');
-                        errorDiv.textContent = data.errors[field];
+
+        document.getElementById('topUpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const url = editingOptionId ?
+                `<?= base_url('/admin/games/topup/update/') ?>${editingOptionId}` :
+                '<?= base_url('/admin/games/topup/save') ?>';
+
+            fetch(url, {
+                    method: 'POST',
+                    body: formData,
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        bootstrap.Modal.getInstance(document.getElementById('addTopUpModal')).hide();
+
+                        location.reload();
+                    } else {
+                        if (data.errors) {
+                            Object.keys(data.errors).forEach(field => {
+                                const input = document.getElementById(field);
+                                const errorDiv = document.getElementById(field + 'Error');
+
+                                if (input && errorDiv) {
+                                    input.classList.add('is-invalid');
+                                    errorDiv.textContent = data.errors[field];
+                                }
+                            });
+                        } else {
+                            alert('Gagal menyimpan: ' + data.message);
+                        }
                     }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Terjadi kesalahan saat menyimpan data');
                 });
-            } else {
-                alert('Gagal menyimpan: ' + data.message);
-            }
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Terjadi kesalahan saat menyimpan data');
-    });
-});
+        });
 
-document.getElementById('addTopUpModal').addEventListener('hidden.bs.modal', resetTopUpModal);
-<?php endif; ?>
+        document.getElementById('addTopUpModal').addEventListener('hidden.bs.modal', resetTopUpModal);
+    <?php endif; ?>
 </script>

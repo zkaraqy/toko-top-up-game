@@ -20,6 +20,12 @@
                     </a>
                 </li>
                 <li class="pc-item">
+                    <a href="<?= base_url('/admin/payment-methods') ?>" class="pc-link">
+                        <span class="pc-micon"><i class="ti ti-credit-card"></i></span>
+                        <span class="pc-mtext">Metode Pembayaran</span>
+                    </a>
+                </li>
+                <li class="pc-item">
                     <a href="<?= base_url('/admin/orders') ?>" class="pc-link">
                         <span class="pc-micon"><i class="ti ti-report-analytics"></i></span>
                         <span class="pc-mtext">Penjualan</span>
