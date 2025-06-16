@@ -6,9 +6,9 @@ use CodeIgniter\Model;
 
 class TopUpOptionModel extends Model
 {
-    protected $table = 'top-up-option';
+    protected $table = 'top_up_option';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['id_game', 'price', 'path_foto'];
+    protected $allowedFields = ['id_game', 'qty', 'price', 'path_foto'];
     protected $useTimestamps = true;
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
