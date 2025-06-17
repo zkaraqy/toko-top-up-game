@@ -2,7 +2,7 @@
 <div class="all-games-section">
     <div class="container">
         <!-- Page Header -->
-        <div class="page-header text-center mb-5">
+        <div class="page-header text-center">
             <h1 class="page-title">
                 <i class="fas fa-gamepad me-3"></i>
                 Semua Game
@@ -55,7 +55,7 @@
                             <i class="fas fa-gamepad no-games-icon"></i>
                             <h3>Belum Ada Game Tersedia</h3>
                             <p class="text-muted">Game sedang dalam proses penambahan. Silakan kembali lagi nanti!</p>
-                            <a href="<?= base_url('/') ?>" class="btn btn-primary">
+                            <a href="<?= base_url('/') ?>" class="btn btn-secondary">
                                 <i class="fas fa-home me-2"></i>
                                 Kembali ke Beranda
                             </a>
@@ -67,7 +67,7 @@
 
         <!-- Back to Homepage -->
         <div class="text-center my-5">
-            <a href="<?= base_url('/') ?>" class="btn btn-outline-primary">
+            <a href="<?= base_url('/') ?>" class="btn btn-outline-secondary">
                 <i class="fas fa-arrow-left me-2"></i>
                 Kembali ke Beranda
             </a>
@@ -79,10 +79,6 @@
     /* All Games Section Styles */
     .all-games-section {
         padding-top: 50px;
-    }
-
-    .page-header {
-        margin-bottom: 4rem;
     }
 
     .page-title {
