@@ -26,7 +26,7 @@
                     </a>
                 </li>
                 <li class="pc-item">
-                    <a href="<?= base_url('/admin/orders') ?>" class="pc-link">
+                    <a href="<?= base_url('/admin/sales') ?>" class="pc-link">
                         <span class="pc-micon"><i class="ti ti-report-analytics"></i></span>
                         <span class="pc-mtext">Penjualan</span>
                     </a>

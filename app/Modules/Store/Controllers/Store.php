@@ -31,6 +31,7 @@ class Store extends BaseController
     }
     public function showAllGame()
     {
+        $games = $this->modelGames->select('games.*, COUNT(top_up_option.id) as total_options')
             ->join('top_up_option', 'top_up_option.id_game = games.id', 'left')
             ->groupBy('games.id')
             ->findAll();
