@@ -199,7 +199,6 @@ class Games extends BaseController
 
             $fileFoto = $this->request->getFile('path_foto');
             if ($fileFoto && $fileFoto->isFile()) {
-                // Create topup directory if not exists
                 if (!is_dir('assets/images/topup/')) {
                     mkdir('assets/images/topup/', 0755, true);
                 }

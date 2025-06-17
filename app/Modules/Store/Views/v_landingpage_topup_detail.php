@@ -31,13 +31,91 @@
                             <i class="fas fa-code me-1"></i>
                             <span><?= $game['developer'] ?></span>
                         </div>
-                    </div>
+                    </div> <?= form_open('/transactions/pesan', ['class' => 'd-flex flex-column gap-2 align-items-center mb-4', 'method' => 'POST']) ?>
 
-                    <!-- Top-Up Options -->
+                    <?php if (session()->getFlashdata('is_success') !== null): ?>
+                        <div class="alert <?= session()->getFlashdata('is_success') ? 'alert-success' : 'alert-danger' ?> alert-dismissible fade show w-100" role="alert">
+                            <strong><?= session()->getFlashdata('title_pesan') ?></strong>
+                            <p class="mb-0"><?= session()->getFlashdata('body_pesan') ?></p>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php endif; ?>
+
+                    <div class="row col-12">
+                        <div class="col-md-6 col-12">
+                            <label for="player_id" class="form-label fw-bold">Player ID <span class="text-danger">*</span></label>
+                            <input type="text" id="player_id"
+                                class="form-control <?= session('errors.player_id') ? 'is-invalid' : '' ?>"
+                                placeholder="Masukkan Player ID..."
+                                name="player_id"
+                                value="<?= old('player_id') ?>"
+                                maxlength="20">
+                            <?php if (session('errors.player_id')): ?>
+                                <div class="invalid-feedback d-block"><?= session('errors.player_id') ?></div>
+                            <?php endif; ?>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <label for="player_server" class="form-label fw-bold">Server <span class="text-danger">*</span></label>
+                            <input type="number" id="player_server" name="player_server"
+                                class="form-control <?= session('errors.player_server') ? 'is-invalid' : '' ?>"
+                                placeholder="Masukkan server..."
+                                value="<?= old('player_server') ?>"
+                                min="1" max="999">
+                            <?php if (session('errors.player_server')): ?>
+                                <div class="invalid-feedback d-block"><?= session('errors.player_server') ?></div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <div class="row col-12">
+                        <div class="col-md-6 col-12">
+                            <label for="id_metode_pembayaran" class="form-label fw-bold">Metode Pembayaran <span class="text-danger">*</span></label>
+                            <select class="form-select <?= session('errors.id_metode_pembayaran') ? 'is-invalid' : '' ?>"
+                                name="id_metode_pembayaran" id="id_metode_pembayaran">
+                                <option value="" disabled selected>Silahkan pilih metode pembayaran...</option>
+                                <?php if (isset($metodePembayaran)): ?>
+                                    <?php foreach ($metodePembayaran as $metode): ?>
+                                        <option value="<?= $metode['id'] ?>" <?= old('id_metode_pembayaran') == $metode['id'] ? 'selected' : '' ?>>
+                                            <?= $metode['label'] ?> (<?= $metode['kode'] ?>)
+                                        </option>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </select>
+                            <?php if (session('errors.id_metode_pembayaran')): ?>
+                                <div class="invalid-feedback d-block"><?= session('errors.id_metode_pembayaran') ?></div>
+                            <?php endif; ?>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <label for="id_top_up_option" class="form-label fw-bold">Paket Top-up <span class="text-danger">*</span></label>
+                            <select class="form-select <?= session('errors.id_top_up_option') ? 'is-invalid' : '' ?>"
+                                name="id_top_up_option" id="id_top_up_option">
+                                <option value="" disabled selected>Silahkan pilih paket top-up...</option>
+                                <?php if (isset($topUpOptions)): ?>
+                                    <?php foreach ($topUpOptions as $option): ?>
+                                        <option value="<?= $option['id'] ?>" <?= old('id_top_up_option') == $option['id'] ? 'selected' : '' ?>>
+                                            <?= $option['qty'] ?> Diamond - Rp <?= number_format($option['price'], 0, ',', '.') ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </select>
+                            <?php if (session('errors.id_top_up_option')): ?>
+                                <div class="invalid-feedback d-block"><?= session('errors.id_top_up_option') ?></div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <div class="w-100">
+                        <div class="d-flex justify-content-end align-items-center">
+                            <button type="submit" class="btn btn-success d-flex align-items-center gap-2 flex-row me-2" style="width: max-content;">
+                                <i class="ti ti-shopping-cart"></i>
+                                <span>Pesan Sekarang</span>
+                            </button>
+                        </div>
+                    </div>
+                    <?= form_close() ?>
+
                     <div class="topup-options">
                         <h4 class="topup-options-title mb-3">
                             <i class="fas fa-gem me-2"></i>
-                            Pilih Paket Diamond
+                            Pilihan Paket Diamond
                         </h4>
 
                         <?php if (!empty($topUpOptions)): ?>
@@ -61,15 +139,6 @@
                                                         Rp <?= number_format($option['price'], 0, ',', '.') ?> (<?= $option['qty'] ?>)
                                                     </div>
                                                 </div>
-
-                                                <div class="topup-select-btn">
-                                                    <i class="fas fa-shopping-cart"></i>
-                                                </div>
-                                            </div>
-
-                                            <!-- Selected indicator -->
-                                            <div class="selected-indicator-inline">
-                                                <i class="fas fa-check"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -91,11 +160,9 @@
 </div>
 
 <style>
-    /* Game Detail Styles */
     .game-detail-section {
-        padding-top: 100px;
+        padding-top: 50px;
         min-height: 100vh;
-        /* background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); */
     }
 
     .game-image-container {
@@ -188,11 +255,6 @@
         background: linear-gradient(135deg, #667eea10 0%, #764ba210 100%);
     }
 
-    .topup-card-inline.selected .selected-indicator-inline {
-        opacity: 1;
-        transform: scale(1);
-    }
-
     .topup-inline-content {
         display: flex;
         align-items: center;
@@ -267,24 +329,6 @@
         transform: scale(1.1);
     }
 
-    .selected-indicator-inline {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        width: 25px;
-        height: 25px;
-        background: #28a745;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 0.8rem;
-        opacity: 0;
-        transform: scale(0);
-        transition: all 0.3s ease;
-    }
-
     .no-options-inline {
         padding: 30px 0;
     }
@@ -297,7 +341,6 @@
         text-align: center;
     }
 
-    /* Responsive Design */
     @media (max-width: 768px) {
         .game-detail-section {
             padding-top: 80px;
@@ -335,42 +378,3 @@
         }
     }
 </style>
-
-<script>
-    let selectedOptionId = null;
-    let selectedPrice = 0;
-
-    function selectTopUpOption(optionId, price) {
-        // Remove previous selection
-        document.querySelectorAll('.topup-card-inline').forEach(card => {
-            card.classList.remove('selected');
-        });
-
-        // Add selection to clicked card
-        event.currentTarget.classList.add('selected');
-
-        // Update selected values
-        selectedOptionId = optionId;
-        selectedPrice = price;
-
-        // Add some visual feedback
-        event.currentTarget.style.animation = 'selectPulse 0.5s ease-in-out';
-        setTimeout(() => {
-            event.currentTarget.style.animation = '';
-        }, 500);
-
-        // Optional: You can add a callback here for further processing
-        console.log(`Selected option: ${optionId}, Price: ${price}`);
-    }
-
-    // Add select animation
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes selectPulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-            100% { transform: scale(1); }
-        }
-    `;
-    document.head.appendChild(style);
-</script>

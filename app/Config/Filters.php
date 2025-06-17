@@ -80,7 +80,7 @@ class Filters extends BaseFilters
                 'except' => ['/', 'login', 'login/*', 'register', 'register/*']
             ],
             'cms' => [
-                'except' => ['/', 'login', 'login/*', 'register', 'register/*', 'logout', 'profile', 'orders', 'orders/*', 'top-up', 'top-up/*']
+                'except' => ['/', 'login', 'login/*', 'register', 'register/*', 'logout', 'profile', 'transactions', 'transactions/*', 'top-up', 'top-up/*', 'api/apipenjualan']
             ]
         ],
         'after' => [

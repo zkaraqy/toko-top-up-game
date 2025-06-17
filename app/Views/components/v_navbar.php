@@ -57,8 +57,8 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="<?= base_url('/admin/orders') ?>">
-                                        <i class="fas fa-shopping-cart me-2"></i>Kelola Order
+                                    <a class="dropdown-item" href="<?= base_url('/admin/sales') ?>">
+                                        <i class="fas fa-shopping-cart me-2"></i>Kelola Penjualan
                                     </a>
                                 </li>
                                 <li>
@@ -86,7 +86,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="<?= base_url('/orders') ?>">
+                                    <a class="dropdown-item" href="<?= base_url('/transactions') ?>">
                                         <i class="fas fa-history me-2"></i>Riwayat Transaksi
                                     </a>
                                 </li>
