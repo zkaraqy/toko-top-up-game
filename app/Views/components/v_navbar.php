@@ -53,7 +53,7 @@
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href="<?= base_url('/admin/payment-methods') ?>">
-                                        <i class="fas fa-credit-card me-2"></i>Metode Pembayaran
+                                        <i class="fas fa-credit-card me-2"></i>Kelola Metode Pembayaran
                                     </a>
                                 </li>
                                 <li>
@@ -80,11 +80,6 @@
                                 <?= session()->get('userData')['username'] ?? 'User' ?>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                <li>
-                                    <a class="dropdown-item" href="<?= base_url('/profile') ?>">
-                                        <i class="fas fa-user-circle me-2"></i>Profile
-                                    </a>
-                                </li>
                                 <li>
                                     <a class="dropdown-item" href="<?= base_url('/transactions') ?>">
                                         <i class="fas fa-history me-2"></i>Riwayat Transaksi

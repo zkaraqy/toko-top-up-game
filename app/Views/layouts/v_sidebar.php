@@ -2,7 +2,7 @@
     <div class="navbar-wrapper">
         <div class="m-header justify-content-center">
             <a href="<?= site_url('/') ?>" class="b-brand text-primary">
-                 <span class="fw-bold fs-4 text-gradient">DiamondStore</span>
+                 <span class="fw-bold fs-4 text-gradient">Toko Top-up Game</span>
             </a>
         </div>
         <div class="navbar-content">
@@ -30,25 +30,6 @@
                         <span class="pc-micon"><i class="ti ti-report-analytics"></i></span>
                         <span class="pc-mtext">Penjualan</span>
                     </a>
-                </li>
-                <li class="pc-item pc-hasmenu">
-                    <a href="#!" class="pc-link">
-                        <span class="pc-micon"><i class="ti ti-settings"></i></span>
-                        <span class="pc-mtext">Pengaturan</span>
-                        <span class="pc-arrow">
-                            <i data-feather="chevron-right"></i>
-                        </span>
-                    </a>
-                    <ul class="pc-submenu">
-                        <li class="pc-item">
-                            <a class="pc-link" href="<?= base_url('/pengaturan/toko') ?>">
-                                <span class="pc-micon">
-                                    <i class="ti ti-home"></i>
-                                </span>
-                                <span class="pc-mtext">Toko</span>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
         </div>
     </div>

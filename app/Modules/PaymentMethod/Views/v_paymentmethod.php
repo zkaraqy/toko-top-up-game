@@ -81,7 +81,7 @@
                                             src="<?= base_url('assets/images/payment-methods/' . $method['path_foto']) ?>"
                                             alt="logo metode pembayaran" width="80px" height="80px"
                                             style="object-fit: cover"
-                                            onerror="this.onerror=null; this.src='<?= base_url('assets/images/blank-payment.png') ?>';" />
+                                            onerror="this.onerror=null; this.src='<?= base_url('assets/images/default_payment_method.png') ?>';" />
                                     </td>
                                     <td>
                                         <?= $method['kode'] ?>

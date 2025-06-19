@@ -17,7 +17,7 @@
                     <?php else: ?>
                         <div class="no-image-placeholder">
                             <i class="fas fa-gamepad"></i>
-                            <p>No Image Available</p>
+                            <p>Gambar Tidak Tersedia</p>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -104,10 +104,12 @@
                     </div>
                     <div class="w-100">
                         <div class="d-flex justify-content-end align-items-center">
-                            <button type="submit" class="btn btn-success d-flex align-items-center gap-2 flex-row me-2" style="width: max-content;">
-                                <i class="ti ti-shopping-cart"></i>
-                                <span>Pesan Sekarang</span>
-                            </button>
+                            <div class="" <?= session()->get('isLoggedIn') == true ? '' : 'data-bs-toggle="tooltip" data-bs-title="Silahkan login terlebih dahulu untuk bisa top-up"' ?>>
+                                <button type="<?= session()->get('isLoggedIn') == true ? 'submit' : 'button' ?>" <?= session()->get('isLoggedIn') == true ? '' : 'disabled' ?> class="btn btn-success d-flex align-items-center gap-2 flex-row me-2" style="width: max-content;">
+                                    <i class="ti ti-shopping-cart"></i>
+                                    <span>Pesan Sekarang</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <?= form_close() ?>
@@ -148,7 +150,7 @@
                             <div class="no-options-inline">
                                 <div class="no-options-content-inline">
                                     <i class="fas fa-gem text-muted me-2"></i>
-                                    <span>Belum ada paket tersedia untuk game ini</span>
+                                    <span>Belum ada paket tersedia</span>
                                 </div>
                             </div>
                         <?php endif; ?>

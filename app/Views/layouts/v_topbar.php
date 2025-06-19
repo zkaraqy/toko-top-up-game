@@ -37,34 +37,12 @@
                                     <h6 class="mb-1"><?= session('userData')['nama'] ?></h6>
                                     <span><?= session('userData')['username'] ?></span>
                                 </div>
-                                <a href="<?= site_url('/logout') ?>" class="pc-head-link bg-transparent"><i class="ti ti-power text-danger"></i></a>
                             </div>
                         </div>
-                        <ul class="nav drp-tabs nav-fill nav-tabs" id="mydrpTab" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <button
-                                    class="nav-link active"
-                                    id="drp-t1"
-                                    data-bs-toggle="tab"
-                                    data-bs-target="#drp-tab-1"
-                                    type="button"
-                                    role="tab"
-                                    aria-controls="drp-tab-1"
-                                    aria-selected="true"><i class="ti ti-user"></i> Profile</button>
-                            </li>
-                        </ul>
                         <div class="tab-content" id="mysrpTabContent">
                             <div class="tab-pane fade show active" id="drp-tab-1" role="tabpanel" aria-labelledby="drp-t1" tabindex="0">
-                                <a href="#!" class="dropdown-item">
-                                    <i class="ti ti-edit-circle"></i>
-                                    <span>Edit Profile</span>
-                                </a>
-                                <a href="#!" class="dropdown-item">
-                                    <i class="ti ti-user"></i>
-                                    <span>Lihat Profile</span>
-                                </a>
                                 <a href="<?= site_url('/logout') ?>" class="dropdown-item">
-                                    <i class="ti ti-power"></i>
+                                    <i class="ti ti-power text-danger"></i>
                                     <span>Logout</span>
                                 </a>
                             </div>

@@ -1,4 +1,11 @@
 document.addEventListener("DOMContentLoaded", function (domEv) {
+  const tooltipTriggerList = document.querySelectorAll(
+    '[data-bs-toggle="tooltip"]'
+  );
+  const tooltipList = [...tooltipTriggerList].map(
+    (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
+  );
+
   const modalHapusElement = document.getElementById("modalHapus");
   const modalInfoElement = document.getElementById("modalInfo");
   const modalResetPasswordElement =
@@ -27,11 +34,13 @@ document.addEventListener("DOMContentLoaded", function (domEv) {
     users: "user",
     games: "game",
     "payment-methods": "metode pembayaran",
+    "penjualan": "penjualan",
   };
   const mapContextAPI = {
     users: "apiusers",
     games: "apigames",
     "payment-methods": "apipaymentmethods",
+    "penjualan": "apipenjualan",
   };
 
   if (togglePassword && fieldPassword) {
@@ -132,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function (domEv) {
 
   let resetPasswordController;
 
-  modalResetPasswordElement.addEventListener("show.bs.modal", async (event) => {
+  modalResetPasswordElement?.addEventListener("show.bs.modal", async (event) => {
     const button = event.relatedTarget;
     const id = button.getAttribute("data-id");
     const context = button.getAttribute("data-context");
