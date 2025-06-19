@@ -13,7 +13,7 @@
                 <form method="GET" action="<?= base_url('/admin/sales/search') ?>" class="mb-3">
                     <div class="input-group">
                         <input type="text" name="q" class="form-control"
-                            placeholder="Cari judul atau developer..."
+                            placeholder="Cari..."
                             value="<?= $q ?? '' ?>">
                         <button class="btn btn-outline-secondary d-flex align-items-center" type="submit">
                             <i class="ti ti-search"></i>
@@ -32,9 +32,11 @@
                     <thead>
                         <tr>
                             <th class="text-center" style="width: 50px;">No</th>
-                            <th class="text-center">Foto</th>
-                            <th>Judul</th>
-                            <th>Developer</th>
+                            <th class="text-center">User</th>
+                            <th>Game</th>
+                            <th>Metode Pembayaran</th>
+                            <th>Harga (qty)</th>
+                            <th>Tanggal</th>
                             <th>Opsi</th>
                         </tr>
                     </thead>
@@ -58,18 +60,31 @@
                                     <td class="text-center"><?php echo $no;
                                                             ++$no; ?></td>
                                     <td>
+                                        <a href="<?= site_url('/admin/users/detail/' . $sale['id_pengguna']) ?>" class="link-primary">
+                                            <?= $sale['nama_pengguna'] ?? '-' ?> (<?= $sale['username_pengguna'] ?? '-'?>)
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="<?= site_url('/admin/games/detail/' . ($sale['id_game'] ?? '-')) ?>" class="link-primary">
+                                            <?= $sale['nama_game'] ?? '-'?>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="<?= site_url('/admin/payment-methods/detail/' . ($sale['metode_pembayaran_id'] ?? '-')) ?>" class="link-primary">
+                                            <?= $sale['metode_pembayaran_label'] ?? '-' ?> (<?= $sale['metode_pembayaran_kode'] ?? '-' ?>)
+                                        </a>
+                                    </td>
+                                    <td>
+                                        Rp <?= number_format($sale['price'], 0, ',', '.') ?> (<i class="ti ti-diamond text-primary"></i> <?= $sale['qty'] ?? '-' ?>)
+                                    </td>
+                                    <td>
+                                        <?= date('d/m/Y H:i', strtotime($sale['created_at'])) ?>
+                                    </td>
+                                    <td>
                                         <div class="d-flex gap-1 flex-column">
-                                            <a href="<?= base_url('/admin/games/detail/' . $sale['id']); ?>" data-bs-toggle="tooltip" data-bs-title="Detail" style="width: max-content;">
-                                                <button type="button" class="btn btn-outline-info d-inline-flex p-1"><i
-                                                        class="ti ti-info-circle"></i></button>
-                                            </a>
-                                            <a href="<?= base_url('/admin/games/form/' . $sale['id']); ?>" data-bs-toggle="tooltip" data-bs-title="Edit" style="width: max-content;">
-                                                <button type="button" class="btn btn-outline-warning d-inline-flex p-1"><i
-                                                        class="ti ti-pencil"></i></button>
-                                            </a>
                                             <div data-bs-toggle="tooltip" data-bs-title="Hapus" style="width: max-content;">
                                                 <button type="button" class="btn btn-outline-danger d-inline-flex p-1"
-                                                    data-bs-toggle="modal" data-bs-target="#modalHapus" data-context="games"
+                                                    data-bs-toggle="modal" data-bs-target="#modalHapus" data-context="penjualan"
                                                     data-id="<?= $sale['id'] ?>"><i class="ti ti-trash"></i></button>
                                             </div>
                                         </div>
@@ -88,6 +103,15 @@
 </div>
 
 <style>
+    .link-primary {
+        color: #1890ff !important;
+        transition: all .5s ease-in-out;
+    }
+
+    .link-primary:hover {
+        text-decoration: underline #1890ff !important;
+    }
+
     .form-control:focus {
         border-color: #667eea;
         box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);

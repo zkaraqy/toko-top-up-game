@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function (domEv) {
   const tooltipTriggerList = document.querySelectorAll(
     '[data-bs-toggle="tooltip"]'
   );
-  console.log(tooltipTriggerList)
   const tooltipList = [...tooltipTriggerList].map(
     (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
   );
@@ -35,11 +34,13 @@ document.addEventListener("DOMContentLoaded", function (domEv) {
     users: "user",
     games: "game",
     "payment-methods": "metode pembayaran",
+    "penjualan": "penjualan",
   };
   const mapContextAPI = {
     users: "apiusers",
     games: "apigames",
     "payment-methods": "apipaymentmethods",
+    "penjualan": "apipenjualan",
   };
 
   if (togglePassword && fieldPassword) {

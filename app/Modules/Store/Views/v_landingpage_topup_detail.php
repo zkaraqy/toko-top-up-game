@@ -17,7 +17,7 @@
                     <?php else: ?>
                         <div class="no-image-placeholder">
                             <i class="fas fa-gamepad"></i>
-                            <p>No Image Available</p>
+                            <p>Gambar Tidak Tersedia</p>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -150,7 +150,7 @@
                             <div class="no-options-inline">
                                 <div class="no-options-content-inline">
                                     <i class="fas fa-gem text-muted me-2"></i>
-                                    <span>Belum ada paket tersedia untuk game ini</span>
+                                    <span>Belum ada paket tersedia</span>
                                 </div>
                             </div>
                         <?php endif; ?>

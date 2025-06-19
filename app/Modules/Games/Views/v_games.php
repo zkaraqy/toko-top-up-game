@@ -78,7 +78,7 @@
                                             src="/assets/images/games/<?= $game['path_foto'] ?>"
                                             alt="foto staf" width="100px" height="auto"
                                             style="object-fit: cover"
-                                            onerror="this.onerror=null; this.src='/assets/images/blank-avatar.png';" />
+                                            onerror="this.onerror=null; this.src='/assets/images/game_default.png';" />
                                     </td>
                                     <td>
                                         <?= $game['title'] ?>

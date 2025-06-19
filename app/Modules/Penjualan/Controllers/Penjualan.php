@@ -67,7 +67,7 @@ class Penjualan extends BaseController
                 'id_metode_pembayaran' => $payload['id_metode_pembayaran'],
                 'player_id' => $payload['player_id'],
                 'player_server' => $payload['player_server'],
-                'total_price' => $totalPrice,
+                'price' => $totalPrice,
             ];
 
             $transactionId = $this->model->insert($dataToSend);
@@ -121,10 +121,93 @@ class Penjualan extends BaseController
         $context = [
             'title' => 'Penjualan | ' . parent::$namaToko,
             'content' => '\App\Modules\Penjualan\Views\admin\v_penjualan',
-            'sales' => $this->model->paginate(5, 'bootstrap'),
+            'sales' => $this->model->select(
+                '
+                penjualan.*, 
+                pengguna.id AS id_pengguna, 
+                pengguna.nama AS nama_pengguna, 
+                pengguna.username AS username_pengguna, 
+                top_up_option.qty AS qty, 
+                games.title AS nama_game, 
+                games.id AS id_game, 
+                metode_pembayaran.id AS metode_pembayaran_id, 
+                metode_pembayaran.kode AS metode_pembayaran_kode, 
+                metode_pembayaran.label AS metode_pembayaran_label'
+            )
+                ->join('pengguna', 'pengguna.id = penjualan.id_pengguna', 'inner')
+                ->join('top_up_option', 'penjualan.id_top_up_option = top_up_option.id')
+                ->join('games', 'top_up_option.id_game = games.id')
+                ->join('metode_pembayaran', 'metode_pembayaran.id = penjualan.id_metode_pembayaran')
+                ->paginate(5, 'bootstrap'),
             'pager' =>  $this->model->pager
         ];
 
+        return view('layouts/v_cms', $context);
+    }
+
+    public function search()
+    {
+        $q = $this->request->getGet('q');
+
+        $builder = $this->model;
+
+        if (!empty($q)) {
+            $builder = $this->model->select(
+                '
+                penjualan.*, 
+                pengguna.id AS id_pengguna, 
+                pengguna.nama AS nama_pengguna, 
+                pengguna.username AS username_pengguna, 
+                top_up_option.qty AS qty, 
+                games.title AS nama_game, 
+                games.id AS id_game, 
+                metode_pembayaran.id AS metode_pembayaran_id, 
+                metode_pembayaran.kode AS metode_pembayaran_kode, 
+                metode_pembayaran.label AS metode_pembayaran_label'
+            )
+                ->join('pengguna', 'pengguna.id = penjualan.id_pengguna', 'inner')
+                ->join('top_up_option', 'penjualan.id_top_up_option = top_up_option.id')
+                ->join('games', 'top_up_option.id_game = games.id')
+                ->join('metode_pembayaran', 'metode_pembayaran.id = penjualan.id_metode_pembayaran')
+                ->groupStart()
+                ->like('pengguna.nama', $q)
+                ->orLike('pengguna.username', $q)
+                ->orLike('games.title', $q)
+                ->orLike('metode_pembayaran.kode', $q)
+                ->orLike('metode_pembayaran.label', $q)
+                ->orLike('penjualan.price', $q)
+                ->orLike('top_up_option.qty', $q)
+                ->groupEnd();
+        } else {
+            $builder = $this->model->select(
+                '
+                penjualan.*, 
+                pengguna.id AS id_pengguna, 
+                pengguna.nama AS nama_pengguna, 
+                pengguna.username AS username_pengguna, 
+                top_up_option.qty AS qty, 
+                games.title AS nama_game, 
+                games.id AS id_game, 
+                metode_pembayaran.id AS metode_pembayaran_id, 
+                metode_pembayaran.kode AS metode_pembayaran_kode, 
+                metode_pembayaran.label AS metode_pembayaran_label'
+            )
+                ->join('pengguna', 'pengguna.id = penjualan.id_pengguna', 'inner')
+                ->join('top_up_option', 'penjualan.id_top_up_option = top_up_option.id')
+                ->join('games', 'top_up_option.id_game = games.id')
+                ->join('metode_pembayaran', 'metode_pembayaran.id = penjualan.id_metode_pembayaran');
+        }
+
+        $sales = $builder->paginate(5, 'bootstrap');
+        $pager = $this->model->pager;
+
+        $context = [
+            'title' => 'CMS | ' . parent::$namaToko,
+            'content' => '\App\Modules\Penjualan\Views\admin\v_penjualan',
+            'sales' => $sales,
+            'pager' => $pager,
+            'q' => $q
+        ];
         return view('layouts/v_cms', $context);
     }
 }

@@ -17,7 +17,7 @@
                                         <th class="text-light">Server</th>
                                         <th class="text-light">Game</th>
                                         <th class="text-light">Metode Pembayaran</th>
-                                        <th class="text-light">Total (qty)</th>
+                                        <th class="text-light">Harga (qty)</th>
                                         <th class="text-light">Tanggal</th>
                                     </tr>
                                 </thead>
@@ -29,7 +29,7 @@
                                             <td><?= $transaction['player_server'] ?></td>
                                             <td><?= $transaction['nama_game'] ?></td>
                                             <td><?= $transaction['metode_pembayaran_label'] ?> (<?= $transaction['metode_pembayaran_kode'] ?>)</td>
-                                            <td>Rp <?= number_format($transaction['total_price'], 0, ',', '.') ?></td>
+                                            <td>Rp <?= number_format($transaction['price'], 0, ',', '.') ?> (<i class="ti ti-diamond text-primary"></i> <?= $transaction['qty'] ?>)</td>
                                             <td><?= date('d/m/Y H:i', strtotime($transaction['created_at'])) ?></td>
                                         </tr>
                                     <?php endforeach; ?>

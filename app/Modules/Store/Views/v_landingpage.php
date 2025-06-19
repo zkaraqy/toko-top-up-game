@@ -26,7 +26,15 @@
                         <a href="<?= site_url('/top-up/games/' . $game['slug']) ?>">
                             <div class="game-card">
                                 <div class="game-image">
-                                    <img src="<?= base_url('assets/images/games/' . $game['path_foto']) ?>" alt="<?= $game['title'] ?>" class="img-fluid">
+                                    <?php if (!empty($game['path_foto'])): ?>
+                                        <img src="<?= base_url('assets/images/games/' . $game['path_foto']) ?>"
+                                            alt="<?= $game['title'] ?>"
+                                            class="game-image">
+                                    <?php else: ?>
+                                        <div class="no-image">
+                                            <i class="fas fa-gamepad"></i>
+                                        </div>
+                                    <?php endif; ?>
                                     <div class="game-overlay">
                                         <div class="game-info">
                                             <h5 class="game-title"><?= $game['title'] ?></h5>
@@ -52,8 +60,14 @@
 </section>
 
 <style>
+    .game-image-wrapper {
+        position: relative;
+        height: 200px;
+        overflow: hidden;
+    }
+
     .hero-section {
-        background: linear-gradient(135deg,rgba(102, 126, 234, 0.45) 0%,rgba(118, 75, 162, 0.57) 100%);
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.45) 0%, rgba(118, 75, 162, 0.57) 100%);
         color: white;
         padding: 80px 0 60px;
         margin-top: -76px;
@@ -223,5 +237,19 @@
         .game-image {
             height: 120px;
         }
+    }
+
+    .no-image {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        color: #6c757d;
+    }
+
+    .no-image i {
+        font-size: 3rem;
     }
 </style>

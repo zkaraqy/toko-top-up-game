@@ -49,6 +49,7 @@ $routes->group('admin', static function (RouteCollection $routes) {
     $routes->get('payment-methods/detail/(:num)', '\App\Modules\PaymentMethod\Controllers\PaymentMethod::detail/$1');
     $routes->post('payment-methods/save', '\App\Modules\PaymentMethod\Controllers\PaymentMethod::save');
     $routes->get('sales', '\App\Modules\Penjualan\Controllers\Penjualan::sales');
+    $routes->get('sales/search', '\App\Modules\Penjualan\Controllers\Penjualan::search');
 });
 $routes->group('transactions', static function (RouteCollection $routes) {
     $routes->post('pesan', '\App\Modules\Penjualan\Controllers\Penjualan::transaction');
