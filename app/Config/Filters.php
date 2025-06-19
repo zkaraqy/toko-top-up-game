@@ -77,7 +77,7 @@ class Filters extends BaseFilters
             // 'csrf',
             // 'invalidchars',
             'auth' => [
-                'except' => ['/', 'login', 'login/*', 'register', 'register/*']
+                'except' => ['/', 'login', 'login/*', 'register', 'register/*', 'top-up', 'top-up/games', 'top-up/games/*']
             ],
             'cms' => [
                 'except' => ['/', 'login', 'login/*', 'register', 'register/*', 'logout', 'profile', 'transactions', 'transactions/*', 'top-up', 'top-up/*', 'api/apipenjualan']

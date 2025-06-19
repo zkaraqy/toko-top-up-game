@@ -171,14 +171,14 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="topup_foto" class="form-label">Foto Diamond (Opsional)</label>
+                            <label for="topup_foto" class="form-label">Foto (Opsional)</label>
                             <input type="file" class="form-control" id="topup_foto" name="path_foto" accept="image/*">
                             <small class="text-muted">Format: JPG, PNG, GIF. Maks 2MB</small>
                             <div class="invalid-feedback"></div>
                         </div>
 
                         <div id="currentImagePreview" class="text-center mb-3" style="display: none;">
-                            <label class="form-label">Foto Saat Ini:</label>
+                            <label class="form-label">Preview:</label>
                             <br>
                             <img id="currentImage" src="" alt="Current" class="img-fluid" style="max-height: 100px;">
                         </div>
@@ -263,7 +263,6 @@
                         </div>
                     `;
                             }
-
                             alert('Top-up option berhasil dihapus!');
                         } else {
                             alert('Gagal menghapus top-up option: ' + data.message);

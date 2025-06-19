@@ -1,4 +1,12 @@
 document.addEventListener("DOMContentLoaded", function (domEv) {
+  const tooltipTriggerList = document.querySelectorAll(
+    '[data-bs-toggle="tooltip"]'
+  );
+  console.log(tooltipTriggerList)
+  const tooltipList = [...tooltipTriggerList].map(
+    (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
+  );
+
   const modalHapusElement = document.getElementById("modalHapus");
   const modalInfoElement = document.getElementById("modalInfo");
   const modalResetPasswordElement =
@@ -132,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function (domEv) {
 
   let resetPasswordController;
 
-  modalResetPasswordElement.addEventListener("show.bs.modal", async (event) => {
+  modalResetPasswordElement?.addEventListener("show.bs.modal", async (event) => {
     const button = event.relatedTarget;
     const id = button.getAttribute("data-id");
     const context = button.getAttribute("data-context");
