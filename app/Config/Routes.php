@@ -22,10 +22,10 @@ $routes->group('top-up', static function (RouteCollection $routes) {
         $routes->get('(:segment)', '\App\Modules\Store\Controllers\Store::showDetailGameAndTopUpOption/$1');
     });
 });
-$routes->get('orders', '\App\Modules\Penjualan\Controllers\Penjualan::orders');
 $routes->get('transactions', '\App\Modules\Penjualan\Controllers\Penjualan::transaction_index');
 $routes->post('transactions/pesan', '\App\Modules\Penjualan\Controllers\Penjualan::transaction');
 $routes->group('admin', static function (RouteCollection $routes) {
+    $routes->get('/', '\App\Modules\Users\Controllers\Users::index');
     $routes->get('users', '\App\Modules\Users\Controllers\Users::index');
     $routes->get('users/search', '\App\Modules\Users\Controllers\Users::search');
     $routes->get('users/form/', '\App\Modules\Users\Controllers\Users::form');

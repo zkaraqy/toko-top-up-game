@@ -2,7 +2,7 @@
     <div class="navbar-wrapper">
         <div class="m-header justify-content-center">
             <a href="<?= site_url('/') ?>" class="b-brand text-primary">
-                 <span class="fw-bold fs-4 text-gradient">Toko Top-up Game</span>
+                 <span class="fw-bold fs-4 text-gradient">ZkaStore</span>
             </a>
         </div>
         <div class="navbar-content">

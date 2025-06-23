@@ -111,11 +111,6 @@ class Penjualan extends BaseController
         return view('layouts/v_template_landingpage', $context);
     }
 
-    public function orders()
-    {
-        return $this->transaction_index();
-    }
-
     public function sales()
     {
         $context = [
