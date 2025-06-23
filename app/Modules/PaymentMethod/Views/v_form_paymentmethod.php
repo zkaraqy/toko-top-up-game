@@ -47,13 +47,13 @@
                         </div>
                     </div>
 
-                    <!-- Logo Upload -->
                     <div class="col-md-6">
                         <div class="form-group mb-3">
-                            <label class="form-label" for="logo">Logo Metode Pembayaran</label>
+                            <label class="form-label" for="foto">Logo Metode Pembayaran</label>
                             <div class="card">
                                 <div class="card-body p-3">
-                                    <div class="d-flex flex-column">                                        <div class="image-preview mb-3 text-center" style="min-height: 200px; display: flex; align-items: center; justify-content: center; background-color: #f8f9fa;">
+                                    <div class="d-flex flex-column">
+                                        <div class="image-preview mb-3 text-center" style="min-height: 200px; display: flex; align-items: center; justify-content: center; background-color: #f8f9fa;">
                                             <?php if (isset($payment_method) && !empty($payment_method['path_foto'])) : ?>
                                                 <img src="<?= base_url('assets/images/payment-methods/' . $payment_method['path_foto']) ?>" alt="Preview" id="imagePreview" class="img-fluid" style="max-height: 200px;">
                                             <?php else : ?>
@@ -65,7 +65,7 @@
                                             <?php endif; ?>
                                         </div>
                                         <input type="file" class="form-control <?= session('errors.path_foto') ? 'is-invalid' : '' ?>"
-                                            id="logo" name="path_foto" accept="image/*">
+                                            id="foto" name="path_foto" accept="image/*">
                                         <small class="text-muted mt-1">Format: JPG, PNG, GIF. Maks 2MB</small>
                                         <?php if (session('errors.path_foto')) : ?>
                                             <div class="invalid-feedback"><?= session('errors.path_foto') ?></div>
@@ -90,27 +90,6 @@
     </div>
 </div>
 
-<script>
-    document.getElementById('logo').addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        const preview = document.getElementById('imagePreview');
-        const noPreview = document.getElementById('noImagePreview');
-
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                preview.src = e.target.result;
-                preview.classList.remove('d-none');
-                if (noPreview) noPreview.style.display = 'none';
-            };
-            reader.readAsDataURL(file);
-        } else {
-            preview.classList.add('d-none');
-            if (noPreview) noPreview.style.display = 'block';
-        }
-    });
-</script>
-
 <style>
     .form-control:focus,
     .form-select:focus {
@@ -121,10 +100,5 @@
     .btn:hover {
         transform: translateY(-1px);
         transition: all 0.3s ease;
-    }
-
-    .card {
-        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-        border: 1px solid rgba(0, 0, 0, 0.125);
     }
 </style>

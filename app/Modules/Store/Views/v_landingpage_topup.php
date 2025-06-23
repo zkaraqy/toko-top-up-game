@@ -1,15 +1,12 @@
-<!-- All Games Section -->
 <div class="all-games-section">
     <div class="container">
-        <!-- Page Header -->
         <div class="page-header text-center">
             <h1 class="page-title">
                 <i class="fas fa-gamepad me-3"></i>
                 Semua Game
             </h1>
         </div>
-        
-        <!-- Games Grid -->
+
         <div class="row g-4">
             <?php if (isset($games) && !empty($games)): ?>
                 <?php foreach ($games as $game): ?>
@@ -65,7 +62,6 @@
             <?php endif; ?>
         </div>
 
-        <!-- Back to Homepage -->
         <div class="text-center my-5">
             <a href="<?= base_url('/') ?>" class="btn btn-outline-secondary">
                 <i class="fas fa-arrow-left me-2"></i>
@@ -76,7 +72,6 @@
 </div>
 
 <style>
-    /* All Games Section Styles */
     .all-games-section {
         padding-top: 50px;
     }
@@ -105,7 +100,6 @@
         margin: 0;
     }
 
-    /* Game Card Styles */
     .game-card {
         background: white;
         border-radius: 20px;
@@ -163,19 +157,12 @@
         transform: translateY(0);
     }
 
-    .play-icon {
-        font-size: 3rem;
-        margin-bottom: 0.5rem;
-        display: block;
-    }
-
     .overlay-text {
         font-size: 1.1rem;
         font-weight: 600;
         margin: 0;
     }
 
-    /* Game Card Body */
     .game-card-body {
         padding: 1.5rem;
     }
@@ -215,7 +202,6 @@
         align-items: center;
     }
 
-    /* No Games */
     .no-games-container {
         text-align: center;
         padding: 80px 20px;
@@ -232,7 +218,6 @@
         margin-bottom: 1rem;
     }
 
-    /* Responsive Design */
     @media (max-width: 768px) {
         .all-games-section {
             padding-top: 80px;
@@ -270,10 +255,6 @@
 
         .game-card-title {
             font-size: 1.2rem;
-        }
-
-        .play-icon {
-            font-size: 2.5rem;
         }
     }
 </style>

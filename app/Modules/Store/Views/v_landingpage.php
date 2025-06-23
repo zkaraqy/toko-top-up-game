@@ -1,4 +1,3 @@
-<!-- Game Selection Section -->
 <section class="games-section py-5">
     <div class="container">
         <div class="text-center mb-5">
@@ -7,7 +6,6 @@
         </div>
 
         <div class="row g-4">
-            <!-- Mobile Legends -->
             <?php if (!isset($games)) { ?>
                 <div class="col-12 d-flex justify-content-center">
                     <div class="alert alert-danger d-flex align-items-center" role="alert">
@@ -21,7 +19,6 @@
                 </div>
             <?php } else { ?>
                 <?php foreach ($games as $game) { ?>
-
                     <div class="col-lg-3 col-md-4 col-sm-6">
                         <a href="<?= site_url('/top-up/games/' . $game['slug']) ?>">
                             <div class="game-card">
@@ -60,33 +57,6 @@
 </section>
 
 <style>
-    .game-image-wrapper {
-        position: relative;
-        height: 200px;
-        overflow: hidden;
-    }
-
-    .hero-section {
-        background: linear-gradient(135deg, rgba(102, 126, 234, 0.45) 0%, rgba(118, 75, 162, 0.57) 100%);
-        color: white;
-        padding: 80px 0 60px;
-        margin-top: -76px;
-        padding-top: 156px;
-    }
-
-    .text-gradient {
-        background: linear-gradient(45deg, #ffffff, #f0f0f0);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-
-    .hero-icon {
-        font-size: 8rem;
-        color: rgba(255, 255, 255, 0.3);
-        animation: float 3s ease-in-out infinite;
-    }
-
     @keyframes float {
 
         0%,
@@ -200,28 +170,10 @@
         transform: translateY(-2px);
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
-        .hero-section {
-            padding: 60px 0 40px;
-            padding-top: 136px;
-        }
-
-        .hero-icon {
-            font-size: 5rem;
-        }
 
         .game-image {
             height: 150px;
-        }
-
-        .payment-card {
-            margin: 5px 2px;
-            padding: 10px;
-        }
-
-        .payment-card img {
-            max-height: 30px;
         }
     }
 

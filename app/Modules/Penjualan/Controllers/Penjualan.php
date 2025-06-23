@@ -104,7 +104,7 @@ class Penjualan extends BaseController
 
         $context = [
             'title' => 'Riwayat Transaksi | ' . parent::$namaToko,
-            'content' => '\App\Modules\Penjualan\Views\v_transaction_history',
+            'content' => '\App\Modules\Penjualan\Views\v_riwayat_transaksi',
             'transactions' => $transactions
         ];
 

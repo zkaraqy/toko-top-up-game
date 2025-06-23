@@ -1,12 +1,10 @@
-<!-- Game Detail Section -->
 <div class="game-detail-section">
     <div class="container">
-        <!-- Back Button -->
         <div class="mb-4">
             <a href="<?= base_url('/top-up/games') ?>" class="btn btn-outline-secondary">
                 <i class="fas fa-arrow-left me-2"></i>Kembali ke Semua Game
             </a>
-        </div> <!-- Game Information -->
+        </div>
         <div class="row mb-5">
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="game-image-container">
@@ -303,34 +301,6 @@
         margin-bottom: 4px;
     }
 
-    .topup-status {
-        font-size: 0.9rem;
-        color: #28a745;
-        font-weight: 500;
-    }
-
-    .topup-status i {
-        color: #28a745;
-    }
-
-    .topup-select-btn {
-        width: 40px;
-        height: 40px;
-        background: #667eea;
-        color: white;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
-        flex-shrink: 0;
-    }
-
-    .topup-card-inline:hover .topup-select-btn {
-        background: #5a6fd8;
-        transform: scale(1.1);
-    }
-
     .no-options-inline {
         padding: 30px 0;
     }
@@ -360,10 +330,6 @@
             padding: 20px 15px;
         }
 
-        .purchase-btn {
-            padding: 12px 30px;
-            font-size: 1.1rem;
-        }
     }
 
     @media (max-width: 576px) {

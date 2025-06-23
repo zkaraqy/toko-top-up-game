@@ -94,7 +94,6 @@
                         </div>
                     <?php } ?>
 
-                    <!-- Image Upload - Right Column -->
                     <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label class="form-label" for="foto">Foto User</label>
@@ -133,7 +132,7 @@
                         </span>
                     </button>
                 </div>
+            </form>
         </div>
-        </form>
     </div>
 </div>

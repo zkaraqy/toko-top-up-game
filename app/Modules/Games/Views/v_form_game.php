@@ -46,7 +46,6 @@
                         </div>
                     </div>
 
-                    <!-- Image Upload -->
                     <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label class="form-label" for="foto">Foto Game</label>
@@ -196,24 +195,6 @@
 <?php endif; ?>
 
 <script>
-    document.getElementById('foto')?.addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        const preview = document.getElementById('imagePreview');
-        const noPreview = document.getElementById('noImagePreview');
-
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                preview.src = e.target.result;
-                preview.classList.remove('d-none');
-                if (noPreview) {
-                    noPreview.style.display = 'none';
-                }
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-
     <?php if (isset($game)) : ?>
         let editingOptionId = null;
 

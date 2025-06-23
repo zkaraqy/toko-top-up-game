@@ -34,13 +34,13 @@ document.addEventListener("DOMContentLoaded", function (domEv) {
     users: "user",
     games: "game",
     "payment-methods": "metode pembayaran",
-    "penjualan": "penjualan",
+    penjualan: "penjualan",
   };
   const mapContextAPI = {
     users: "apiusers",
     games: "apigames",
     "payment-methods": "apipaymentmethods",
-    "penjualan": "apipenjualan",
+    penjualan: "apipenjualan",
   };
 
   if (togglePassword && fieldPassword) {
@@ -56,11 +56,6 @@ document.addEventListener("DOMContentLoaded", function (domEv) {
   }
 
   if (modalHapusElement && modalInfoElement) {
-    modalInfoElement.addEventListener("hidden.bs.modal", function (event) {
-      // Refresh halaman
-      // window.location.reload();
-    });
-
     modalHapusElement.addEventListener("show.bs.modal", async (event) => {
       const button = event.relatedTarget;
       const id = button.getAttribute("data-id");
@@ -130,6 +125,9 @@ document.addEventListener("DOMContentLoaded", function (domEv) {
           };
 
           reader.readAsDataURL(fotoInput.files[0]);
+        } else {
+          imagePreview.classList.add("d-none");
+          if (noImagePreview) noImagePreview.style.display = "block";
         }
       });
     }
@@ -141,94 +139,95 @@ document.addEventListener("DOMContentLoaded", function (domEv) {
 
   let resetPasswordController;
 
-  modalResetPasswordElement?.addEventListener("show.bs.modal", async (event) => {
-    const button = event.relatedTarget;
-    const id = button.getAttribute("data-id");
-    const context = button.getAttribute("data-context");
+  modalResetPasswordElement?.addEventListener(
+    "show.bs.modal",
+    async (event) => {
+      const button = event.relatedTarget;
+      const id = button.getAttribute("data-id");
+      const context = button.getAttribute("data-context");
 
-    const tombolAksiResetPassword = document.getElementById(
-      "tombol-yakin-modal-reset-password"
-    );
-    const spinnerTombolModalResetPassword = document.getElementById(
-      "spinner-tombol-modal-reset-password"
-    );
+      const tombolAksiResetPassword = document.getElementById(
+        "tombol-yakin-modal-reset-password"
+      );
+      const spinnerTombolModalResetPassword = document.getElementById(
+        "spinner-tombol-modal-reset-password"
+      );
 
-    if (resetPasswordController) {
-      resetPasswordController.abort();
-    }
+      if (resetPasswordController) {
+        resetPasswordController.abort();
+      }
 
-    resetPasswordController = new AbortController();
+      resetPasswordController = new AbortController();
 
-    tombolAksiResetPassword.addEventListener(
-      "click",
-      async function (event) {
-        try {
-          tombolAksiResetPassword.setAttribute("disabled", true);
-          spinnerTombolModalResetPassword.classList.replace(
-            "d-none",
-            "d-inline-block"
-          );
+      tombolAksiResetPassword.addEventListener(
+        "click",
+        async function (event) {
+          try {
+            tombolAksiResetPassword.setAttribute("disabled", true);
+            spinnerTombolModalResetPassword.classList.replace(
+              "d-none",
+              "d-inline-block"
+            );
 
-          const formData = new FormData();
-          formData.append("id", id);
+            const formData = new FormData();
+            formData.append("id", id);
 
-          const response = await fetch("/api/users/reset-password", {
-            method: "POST",
-            body: formData,
-          });
+            const response = await fetch("/api/users/reset-password", {
+              method: "POST",
+              body: formData,
+            });
 
-          const result = await response.json();
-          if (result.success) {
-            // Change modal header color for success
-            modalInfoElement.querySelector(".modal-header").className =
-              "modal-header";
-            modalInfoElement.querySelector(
-              "h1"
-            ).innerHTML = `<i class="ti ti-check-circle me-2"></i>Password berhasil direset!`;
+            const result = await response.json();
+            if (result.success) {
+              modalInfoElement.querySelector(".modal-header").className =
+                "modal-header";
+              modalInfoElement.querySelector(
+                "h1"
+              ).innerHTML = `<i class="ti ti-check-circle me-2"></i>Password berhasil direset!`;
 
-            const passwordHtml = `
+              const passwordHtml = `
             <div class="password-display">
               <p class="mb-2">Password baru untuk user "${result.username}":</p>
               <div class="fw-bold" >${result.new_password}</div>
             </div>`;
 
-            modalInfoElement.querySelector("div.modal-body").innerHTML =
-              passwordHtml;
-          } else {
-            // Reset modal header color for error
-            modalInfoElement.querySelector(".modal-header").className =
-              "modal-header";
-            modalInfoElement.querySelector(
-              "h1"
-            ).innerHTML = `<i class="ti ti-alert-circle me-2"></i>Gagal reset password!`;
+              modalInfoElement.querySelector("div.modal-body").innerHTML =
+                passwordHtml;
+            } else {
+              modalInfoElement.querySelector(".modal-header").className =
+                "modal-header";
+              modalInfoElement.querySelector(
+                "h1"
+              ).innerHTML = `<i class="ti ti-alert-circle me-2"></i>Gagal reset password!`;
+              modalInfoElement.querySelector("div.modal-body").innerText =
+                result.message || "Terjadi kesalahan saat reset password";
+            }
+
+            tombolAksiResetPassword.removeAttribute("disabled");
+            spinnerTombolModalResetPassword.classList.replace(
+              "d-inline-block",
+              "d-none"
+            );
+            modalInfo.show();
+          } catch (error) {
+            console.error("Error:", error);
+            modalInfoElement.querySelector("h1").innerText =
+              "Terjadi kendala pada aplikasi";
             modalInfoElement.querySelector("div.modal-body").innerText =
-              result.message || "Terjadi kesalahan saat reset password";
+              "Terjadi kendala pada aplikasi, mohon hubungi admin";
+            modalInfo.show();
+
+            tombolAksiResetPassword.removeAttribute("disabled");
+            spinnerTombolModalResetPassword.classList.replace(
+              "d-inline-block",
+              "d-none"
+            );
+          } finally {
+            modalResetPassword.hide();
           }
-
-          tombolAksiResetPassword.removeAttribute("disabled");
-          spinnerTombolModalResetPassword.classList.replace(
-            "d-inline-block",
-            "d-none"
-          );
-          modalInfo.show();
-        } catch (error) {
-          console.error("Error:", error);
-          modalInfoElement.querySelector("h1").innerText =
-            "Terjadi kendala pada aplikasi";
-          modalInfoElement.querySelector("div.modal-body").innerText =
-            "Terjadi kendala pada aplikasi, mohon hubungi admin";
-          modalInfo.show();
-
-          tombolAksiResetPassword.removeAttribute("disabled");
-          spinnerTombolModalResetPassword.classList.replace(
-            "d-inline-block",
-            "d-none"
-          );
-        } finally {
-          modalResetPassword.hide();
-        }
-      },
-      { signal: resetPasswordController.signal }
-    );
-  });
+        },
+        { signal: resetPasswordController.signal }
+      );
+    }
+  );
 });

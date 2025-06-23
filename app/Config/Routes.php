@@ -16,12 +16,12 @@ $routes->group('register', static function (RouteCollection $routes) {
     $routes->post("submit", '\App\Modules\Registration\Controllers\Registration::submit');
 });
 $routes->group('top-up', static function (RouteCollection $routes) {
+    $routes->get('/', '\App\Modules\Store\Controllers\Store::index');
     $routes->group('games', static function (RouteCollection $routes) {
         $routes->get('/', '\App\Modules\Store\Controllers\Store::showAllGame');
         $routes->get('(:segment)', '\App\Modules\Store\Controllers\Store::showDetailGameAndTopUpOption/$1');
     });
 });
-$routes->get('profile', '');
 $routes->get('orders', '\App\Modules\Penjualan\Controllers\Penjualan::orders');
 $routes->get('transactions', '\App\Modules\Penjualan\Controllers\Penjualan::transaction_index');
 $routes->post('transactions/pesan', '\App\Modules\Penjualan\Controllers\Penjualan::transaction');
@@ -50,9 +50,6 @@ $routes->group('admin', static function (RouteCollection $routes) {
     $routes->post('payment-methods/save', '\App\Modules\PaymentMethod\Controllers\PaymentMethod::save');
     $routes->get('sales', '\App\Modules\Penjualan\Controllers\Penjualan::sales');
     $routes->get('sales/search', '\App\Modules\Penjualan\Controllers\Penjualan::search');
-});
-$routes->group('transactions', static function (RouteCollection $routes) {
-    $routes->post('pesan', '\App\Modules\Penjualan\Controllers\Penjualan::transaction');
 });
 
 $routes->group('api', function (RouteCollection $routes) {
