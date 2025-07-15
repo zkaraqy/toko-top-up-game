@@ -4,9 +4,6 @@
 ## Description
 This project is a web-based application for purchasing game top-up credits (diamonds) built with CodeIgniter 4. It was developed as a final project (UAS) for the Web Programming course at university. The application allows users to browse games, select top-up options, manage transactions, and provides an admin dashboard for managing users, games, payment methods, and sales records.
 
-**GitHub Repo Description:**
-> A CodeIgniter 4 web application for game top-up transactions, built as a final project for the "Pemrograman Website" course. Features user registration, game catalog, payment methods, transaction history, and admin dashboard.
-
 ## What is this project?
 A full-featured web platform for digital game top-up transactions. Users can register, log in, browse available games, choose top-up packages, and pay using various payment methods. Admins can manage all entities and view transaction histories.
 
